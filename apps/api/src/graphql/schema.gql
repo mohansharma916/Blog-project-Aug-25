@@ -1,0 +1,117 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: String!
+  name: String!
+  email: String!
+  bio: String
+  avatar: String
+  posts: [Post!]!
+  comments: [CommentEntity!]!
+}
+
+type CommentEntity {
+  id: String!
+  content: String!
+  post: Post!
+  author: User!
+  createdAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Tag {
+  id: String!
+  name: String!
+  posts: [Post!]!
+}
+
+type Count {
+  likes: Int!
+  comments: Int!
+}
+
+type Post {
+  id: String!
+  title: String!
+  slug: String
+  thumbnail: String
+  content: String!
+  published: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  author: User!
+  tags: [Tag!]
+  comments: [CommentEntity!]!
+  _count: Count!
+}
+
+type AuthPayload {
+  id: String!
+  name: String!
+  avatar: String
+  accessToken: String!
+}
+
+type Query {
+  posts(skip: Float, take: Float): [Post!]!
+  postCount: Int!
+  getPostById(id: String!): Post!
+  getUserPosts(skip: Int, take: Int): [Post!]!
+  userPostCount: Int!
+  getPostComments(postId: String!, take: Int = 12, skip: Int = 0): [CommentEntity!]!
+  postCommentCount(postId: String!): Int!
+  postLikesCount(postId: String!): Int!
+  userLikedPost(postId: String!): Boolean!
+}
+
+type Mutation {
+  createPost(createPostInput: CreatePostInput!): Post!
+  updatePost(updatePostInput: UpdatePostInput!): Post!
+  deletePost(postId: String!): Boolean!
+  createUser(createUserInput: CreateUserInput!): User!
+  createComment(createCommentInput: CreateCommentInput!): CommentEntity!
+  likePost(postId: String!): Boolean!
+  unlikePost(postId: String!): Boolean!
+  signIn(signInInput: SignInInput!): AuthPayload!
+}
+
+input CreatePostInput {
+  title: String!
+  content: String!
+  thumbnail: String
+  tags: [String!]!
+  published: Boolean!
+}
+
+input UpdatePostInput {
+  title: String
+  content: String
+  thumbnail: String
+  tags: [String!]
+  published: Boolean
+  postId: String!
+}
+
+input CreateUserInput {
+  name: String!
+  password: String!
+  email: String!
+  bio: String
+  avatar: String
+}
+
+input CreateCommentInput {
+  postId: String!
+  content: String!
+}
+
+input SignInInput {
+  email: String!
+  password: String!
+}
