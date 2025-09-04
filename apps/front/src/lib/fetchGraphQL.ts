@@ -25,6 +25,8 @@ export const fetchGraphQL = async (query: string, variables = {}) => {
 };
 
 export const authFetchGraphQL = async (query: string, variables = {}) => {
+
+  console.log("authFetchGraphQL", { query, variables });
   const session = await getSession();
   const response = await fetch(`${BACKEND_URL}/graphql`, {
     method: "POST",

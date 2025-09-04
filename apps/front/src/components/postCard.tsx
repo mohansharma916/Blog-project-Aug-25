@@ -12,6 +12,7 @@ const PostCard = ({
   createdAt,
 }: Props) => {
   return (
+    <Link href={`/blog/${slug}/${id}`}  key={id}>
     <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
       <div className="relative h-60 ">
         <Image src={thumbnail ?? "/no-image.png"} alt={title ?? ""} fill />
@@ -26,14 +27,15 @@ const PostCard = ({
         <p className="mt-4 text-gray-700 break-words">
           {content?.slice(0, 100)}...
         </p>
-        <Link
+        <p
           className="text-indigo-600 hover:underline mt-auto text-right block"
-          href={`/blog/${slug}/${id}`}
+          // href={`/blog/${slug}/${id}`}
         >
           Read more
-        </Link>
+        </p>
       </div>
     </div>
+    </Link>
   );
 };
 

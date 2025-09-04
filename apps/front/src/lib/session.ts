@@ -1,7 +1,7 @@
 import { jwtVerify, SignJWT } from "jose";
 
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { NextRequest } from "next/server";
 
 export type SessionUser = {
   id?: string;
@@ -28,25 +28,44 @@ export async function createSession(payload: Session) {
 
   (await cookies()).set("session", session, {
     httpOnly: true,
-    secure: true,
+    secure: false,
     expires: expiredAt,
     sameSite: "lax",
     path: "/",
   });
 }
 
-export async function getSession() {
-  const cookie = (await cookies()).get("session")?.value;
+export async function getSessionFromMiddleware(request: NextRequest) {
+  const cookie = request.cookies.get("session")?.value;
   if (!cookie) return null;
 
   try {
     const { payload } = await jwtVerify(cookie, encodedKey, {
       algorithms: ["HS256"],
     });
+    console.log("MOHAN3", payload);
+    return payload as Session;
+  } catch (err) {
+    console.error("Failed to verify session:", err);
+    return null;
+  }
+}
+
+export async function getSession() {
+
+  const cookie = (await cookies()).get("session")?.value;
+
+  if (!cookie) return null;
+
+  try {
+    const { payload } = await jwtVerify(cookie, encodedKey, {
+      algorithms: ["HS256"],
+    });
+   console.log("MOHAN3", payload);
     return payload as Session;
   } catch (err) {
     console.error("Failed to verify the session: ", err);
-    redirect("/auth/sginin");
+    // redirect("/auth/signin");
   }
 }
 

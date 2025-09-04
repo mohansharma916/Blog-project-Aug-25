@@ -1,6 +1,7 @@
 import { Post } from "@/lib/types/modelTypes";
 import PostCard from "./postCard";
 import Pagination from "./pagination";
+// import Link from "next/link";
 
 type Props = {
   posts: Post[];
@@ -16,7 +17,9 @@ const Posts = (props: Props) => {
       <div className="h-1 mx-auto bg-gradient-to-r from-sky-500 to-indigo-500 w-96 mb-9 rounded-t-md mt-5"></div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {props.posts.map((post) => (
+        
           <PostCard key={post.id} {...post} />
+        
         ))}
       </div>
       <Pagination

@@ -18,9 +18,8 @@ export class PostResolver {
     @Args('skip', { nullable: true }) skip?: number,
     @Args('take', { nullable: true }) take?: number,
   ) {
-    const user = context.req.user;
-    console.log({ user });
-
+    // const user = context.req.user;
+    // console.log('User making request:', user);
     return this.postService.findAll({ skip, take });
   }
 

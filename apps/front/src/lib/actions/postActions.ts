@@ -70,17 +70,17 @@ export async function saveNewPost(
       data: Object.fromEntries(formData.entries()),
       errors: validatedFields.error.flatten().fieldErrors,
     };
-  let thumbnailUrl = "";
+  // let thumbnailUrl = "";
   // Todo:Upload Thumbnail to supabase
-  if (validatedFields.data.thumbnail)
-    thumbnailUrl = await uploadThumbnail(validatedFields.data.thumbnail);
+  // if (validatedFields.data.thumbnail)
+  //   thumbnailUrl = await uploadThumbnail(validatedFields.data.thumbnail);
 
   // Todo: call garphql api
 
   const data = await authFetchGraphQL(print(CREATE_POST_MUTATION), {
     input: {
       ...validatedFields.data,
-      thumbnail: thumbnailUrl,
+      thumbnail: "https://picsum.photos/200",
     },
   });
 
