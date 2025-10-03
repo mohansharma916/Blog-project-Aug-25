@@ -1,10 +1,9 @@
 import { z } from "zod";
 
 export const PostFormSchema = z.object({
-  // postId: z
-  //   .string()
-  //   .transform((value) => parseInt(value))
-  //   .optional(),
+  postId: z
+    .string()
+    .optional(),
   title: z.string().min(5).max(100),
   content: z.string().min(20),
   tags: z
@@ -16,4 +15,4 @@ export const PostFormSchema = z.object({
   published: z.string().transform((value) => value === "on"),
 });
 
-// db,dataScience,web,,
+

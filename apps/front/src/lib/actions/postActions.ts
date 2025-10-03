@@ -15,6 +15,7 @@ import { Post } from "../types/modelTypes";
 import { PostFormState } from "../types/formState";
 import { PostFormSchema } from "../zodSchemas/postFormSchema";
 import { uploadThumbnail } from "../upload";
+import { stat } from "fs";
 
 export const fetchPosts = async ({
   page,
@@ -61,10 +62,14 @@ export async function saveNewPost(
   state: PostFormState,
   formData: FormData
 ): Promise<PostFormState> {
+  console.log("ui0", Object.fromEntries(formData.entries()));
   const validatedFields = PostFormSchema.safeParse(
     Object.fromEntries(formData.entries())
   );
 
+  console.log("ui1",validatedFields);
+
+  
   if (!validatedFields.success)
     return {
       data: Object.fromEntries(formData.entries()),
@@ -77,10 +82,13 @@ export async function saveNewPost(
 
   // Todo: call garphql api
 
+  console.log("ui2",validatedFields.data);
+
   const data = await authFetchGraphQL(print(CREATE_POST_MUTATION), {
+
     input: {
       ...validatedFields.data,
-      thumbnail: "https://picsum.photos/200",
+      // thumbnail: "https://picsum.photos/200",
     },
   });
 

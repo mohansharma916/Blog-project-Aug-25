@@ -1,9 +1,10 @@
 import { BACKEND_URL } from "@/lib/constants";
 import { createSession } from "@/lib/session";
 import { redirect } from "next/navigation";
-import { NextResponse } from "next/server";
+// import { NextResponse } from "next/server";
 
-export async function GET(req: NextResponse) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function GET(req: any) {
   const { searchParams } = new URL(req.url);
 
   const accessToken = searchParams.get("accessToken");

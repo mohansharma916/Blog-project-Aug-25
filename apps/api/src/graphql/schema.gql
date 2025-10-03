@@ -58,6 +58,13 @@ type AuthPayload {
   accessToken: String!
 }
 
+type UploadUrlPayload {
+  uploadUrl: String!
+  key: String!
+  publicUrl: String!
+  expiresIn: Int!
+}
+
 type Query {
   posts(skip: Float, take: Float): [Post!]!
   postCount: Int!
@@ -79,6 +86,7 @@ type Mutation {
   likePost(postId: String!): Boolean!
   unlikePost(postId: String!): Boolean!
   signIn(signInInput: SignInInput!): AuthPayload!
+  generateUploadUrl(input: GenerateUploadUrlInput!): UploadUrlPayload!
 }
 
 input CreatePostInput {
@@ -114,4 +122,10 @@ input CreateCommentInput {
 input SignInInput {
   email: String!
   password: String!
+}
+
+input GenerateUploadUrlInput {
+  filename: String!
+  contentType: String!
+  size: Int
 }

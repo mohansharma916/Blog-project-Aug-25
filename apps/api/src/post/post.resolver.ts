@@ -57,13 +57,13 @@ export class PostResolver {
 
   @UseGuards(JwtAuthGuard)
   @Mutation(() => Post)
-  createPost(
+  async createPost(
     @Context() context,
     @Args('createPostInput') createPostInput: CreatePostInput,
   ) {
     const authorId = context.req.user.id;
 
-    return this.postService.create({ createPostInput, authorId });
+    return await this.postService.create({ createPostInput, authorId });
   }
 
   @UseGuards(JwtAuthGuard)

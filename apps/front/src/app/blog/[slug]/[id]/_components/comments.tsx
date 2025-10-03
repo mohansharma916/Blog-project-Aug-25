@@ -2,7 +2,6 @@
 import { getPostComments } from "@/lib/actions/commentActions";
 import { DEFAULT_PAGE_SIZE } from "@/lib/constants";
 import { useQuery } from "@tanstack/react-query";
-import { comment } from "postcss";
 import { useState } from "react";
 import CommentCard from "./commentCard";
 import CommentPagination from "./CommentPagination";

@@ -21,7 +21,7 @@ const DeletePostPage = async (props: Props) => {
   const params = await props.params;
   const post = await fetchPostById(params.id);
 
-  const formAction = async (formData: FormData) => {
+  const formAction = async () => {
     "use server";
     await deletePost(+params.id);
     redirect("/user/posts");

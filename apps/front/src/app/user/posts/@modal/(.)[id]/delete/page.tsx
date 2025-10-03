@@ -12,7 +12,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { deletePost } from "@/lib/actions/postActions";
 import { AlertDialogAction } from "@radix-ui/react-alert-dialog";
-import Link from "next/link";
 import { use } from "react";
 
 type Props = {

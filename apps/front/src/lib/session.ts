@@ -43,7 +43,7 @@ export async function getSessionFromMiddleware(request: NextRequest) {
     const { payload } = await jwtVerify(cookie, encodedKey, {
       algorithms: ["HS256"],
     });
-    console.log("MOHAN3", payload);
+   
     return payload as Session;
   } catch (err) {
     console.error("Failed to verify session:", err);
@@ -61,7 +61,6 @@ export async function getSession() {
     const { payload } = await jwtVerify(cookie, encodedKey, {
       algorithms: ["HS256"],
     });
-   console.log("MOHAN3", payload);
     return payload as Session;
   } catch (err) {
     console.error("Failed to verify the session: ", err);

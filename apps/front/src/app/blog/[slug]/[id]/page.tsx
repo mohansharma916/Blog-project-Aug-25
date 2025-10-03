@@ -11,7 +11,7 @@ type Props = {
   };
 };
 const PostPage = async ({ params }: Props) => {
-  const postId = (await params).id;
+  const postId = (params).id;
   const post = await fetchPostById(postId);
   const session = await getSession();
 

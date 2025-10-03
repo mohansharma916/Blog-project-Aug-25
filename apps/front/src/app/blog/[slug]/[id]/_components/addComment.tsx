@@ -41,7 +41,7 @@ const AddComment = (props: Props) => {
         description: state?.message,
       });
     if (state?.ok) props.refetch();
-  }, [state]);
+  }, [props, state, toast]);
   return (
     <Dialog open={state?.open}>
       <DialogTrigger asChild>

@@ -1,6 +1,5 @@
 "use client";
 
-import DOMPurify from "dompurify";
 type Props = {
   content: string;
   className?: string;
